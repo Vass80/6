@@ -28,6 +28,24 @@ class Student:
         return (f'Имя: {self.name}, \nФамилия: {self.surname}\nСредняя оценка за д\з: {mid_grades/sum_kursov}'
                 f'\nКурсы в процессе изучения: {self.courses_in_progress}\nЗавершенные курсы: {self.finished_courses}')
 
+    def __eq__(self, other):
+        mid_grades = sum_kursov = 0
+        for kurs in self.grades.values():
+            for grades in range(len(kurs)):
+                    mid_grades += kurs[grades]
+                    sum_kursov += 1
+        if sum_kursov != 0:
+             avarge_1 = mid_grades/sum_kursov
+        mid_grades = sum_kursov = 0
+
+        mid_grades = sum_kursov = 0
+        for kurs in other.grades.values():
+            for grades in range(len(kurs)):
+                    mid_grades += kurs[grades]
+                    sum_kursov += 1
+        if sum_kursov != 0:
+             avarge_2 = mid_grades/sum_kursov
+        return avarge_1 == avarge_2
 
 class Mentor:
     def __init__(self, name, surname):
@@ -70,6 +88,9 @@ def avarge_grades(spisok, kurs): # для студентов и лекторов
     if kol_grades == 0:
         return ('Ошибка')
     return (f'Cредний балл по курсу {kurs} : {summa/kol_grades}\n')
+
+# Реализуйте возможность сравнивать (через операторы сравнения) между
+# собой лекторов по средней оценке за лекции и студентов по средней оценке за домашние задания.
 
 spisok_studentov = []
 spisok_lectorov = []
@@ -116,3 +137,5 @@ print (spisok_lectorov[1])
 print (spisok_studentov[1])
 print (avarge_grades(spisok_studentov, 'Python'))
 print (avarge_grades(spisok_lectorov, 'Java'))
+
+print (spisok_studentov[0] == spisok_studentov[1])
